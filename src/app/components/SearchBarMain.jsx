@@ -16,9 +16,15 @@ const SearchBarMain = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const storedMovieList = localStorage.getItem("movieList");
-  const storedSearchResult = localStorage.getItem("searchResult");
-  const storedPageNumber = localStorage.getItem("pageNumber");
+  let storedMovieList;
+  let storedSearchResult;
+  let storedPageNumber;
+
+  if (typeof window !== "undefined") {
+    storedMovieList = localStorage.getItem("movieList");
+    storedSearchResult = localStorage.getItem("searchResult");
+    storedPageNumber = localStorage.getItem("pageNumber");
+  }
 
   const movieListRef = useRef(storedMovieList ? storedMovieList : null);
   const pageRef = useRef(storedPageNumber ? storedPageNumber : 1);
