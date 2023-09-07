@@ -7,7 +7,6 @@ import MovieList from "./MovieList";
 import Pagination from "./Pagination";
 import { CgSpinner } from "react-icons/cg";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 const SearchBarMain = () => {
   const [searchInput, setSearchInput] = useState(null);
@@ -29,15 +28,11 @@ const SearchBarMain = () => {
   const movieListRef = useRef(storedMovieList ? storedMovieList : null);
   const pageRef = useRef(storedPageNumber ? storedPageNumber : 1);
 
-  console.log("pageRef.current = ", pageRef.current);
-  // console.log("movieListRef.current = ", movieListRef.current);
-
   const fetchApi = async currentPage => {
     const error = JSON.parse(storedMovieList);
 
-    console.log("error.Error =  ", error.Error);
+    // console.log("error.Error =  ", error.Error);
 
-    // console.log("storedSearchResult = ", storedSearchResult);
     if (error?.Error) {
       localStorage.removeItem("searchResult");
       localStorage.removeItem("movieList");
@@ -55,8 +50,6 @@ const SearchBarMain = () => {
       localStorage.setItem("movieList", JSON.stringify(data));
       localStorage.setItem("pageNumber", JSON.stringify(pageRef.current));
       localStorage.setItem("totalResults", JSON.stringify(~~data.totalResults));
-
-      // console.log("movieListRef.current = ", movieListRef.current);
     }
   };
 
@@ -82,7 +75,7 @@ const SearchBarMain = () => {
       movieListRef.current = data;
       setMovieList(movieListRef.current);
 
-      console.log(movieList?.Error);
+      //* console.log(movieList?.Error);
 
       setSearchResult(searchInput);
       localStorage.setItem("movieList", JSON.stringify(data));
@@ -107,7 +100,6 @@ const SearchBarMain = () => {
   };
 
   useEffect(() => {
-    // console.log("storedMovieList= ", storedMovieList);
     if (storedSearchResult) {
       pageRef.current = storedPageNumber ? JSON.parse(storedPageNumber) : null;
     }
@@ -157,9 +149,6 @@ const SearchBarMain = () => {
                         : "${searchResult}"
                     }`}
                   </h3>
-                  {/* <h3 className="flex justify-center text-xl font-semibold  mb-2">
-                  {`${movieList?.totalResults !== undefined ? movieList?.totalResults : 0}  Movies Found!`}
-                  </h3> */}
                 </>
               ) : movieList !== null ? (
                 <h3 className="flex justify-center text-2xl font-semibold mt-4 mb-2">
@@ -177,7 +166,10 @@ const SearchBarMain = () => {
           )}
         </div>
 
-        {searchResult === null && !isLoading && storedMovieList === null ? (
+        {searchResult === null &&
+        !isLoading &&
+        window &&
+        storedMovieList === null ? (
           <Image
             className="transition-all opacity-0  absolute right-1/2 translate-x-1/2 mt-8 duration-[1s] delay-500"
             src={`/popcorn-bear.gif`}
@@ -190,23 +182,23 @@ const SearchBarMain = () => {
           searchResult !== null &&
           !isLoading &&
           (!movieList || movieList.Error) && (
-            <Image
-              className="transition-all absolute right-1/2 translate-x-1/2 mt-2 duration-300"
-              src={`/popcorn-crazy.gif`}
-              alt="Popcorn Bear"
-              width={300}
-              height={300}
-              onLoadingComplete={image => image.classList.remove("opacity-0")}
-            />
+            <div>
+              <Image
+                className="transition-all absolute right-1/2 translate-x-1/2 mt-2 duration-300"
+                src={`/popcorn-crazy.gif`}
+                alt="Popcorn Bear"
+                width={300}
+                height={300}
+                onLoadingComplete={image => image.classList.remove("opacity-0")}
+              />
+            </div>
           )
         )}
       </div>
-      {/* {pageNumber} */}
       {movieList?.totalResults !== undefined &&
         movieList?.totalResults > 10 && (
           <Pagination
             totalResults={movieList.totalResults}
-            // handleSearchClick={handleSearchClick}
             fetchApi={fetchApi}
             pageRef={pageRef}
           />

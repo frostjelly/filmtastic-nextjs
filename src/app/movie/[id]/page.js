@@ -7,9 +7,6 @@ const MovieIdPage = async ({ params }) => {
     const res = await fetch(
       `https://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_OMDB_API}&i=${params.id}&plot=full`
     );
-    // console.log(
-    //   `https://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_OMDB_API}&i=${params.id}&plot=full`
-    // );
     return res.json();
   };
   const movie = await fetchMovie();
@@ -132,7 +129,6 @@ const MovieIdPage = async ({ params }) => {
             )}
 
             <div className="mt-4 mr-2 space-y-2">
-              {/* <h2 className="mb-4 font-bold text-xl">Genres</h2> */}
             </div>
           </div>
         </div>

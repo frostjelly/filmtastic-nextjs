@@ -8,13 +8,10 @@ const RecommendedMovies = () => {
 
   const storedMovieList = localStorage.getItem("movieList");
   const movieList = JSON.parse(storedMovieList);
-  // console.log("movieList = ", movieList);
-  // console.log(id);
   const recommenedMovies = movieList?.Search.filter(
     movie => movie.imdbID !== id
     // && movie.Poster !== "N/A"
   );
-  // console.log(recommenedMovies);
   return (
     <>
       {recommenedMovies?.length > 1 && (
