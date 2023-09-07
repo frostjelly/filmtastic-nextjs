@@ -168,7 +168,7 @@ const SearchBarMain = () => {
 
         {searchResult === null &&
         !isLoading &&
-        window &&
+        typeof window &&
         storedMovieList === null ? (
           <Image
             className="transition-all opacity-0  absolute right-1/2 translate-x-1/2 mt-8 duration-[1s] delay-500"
