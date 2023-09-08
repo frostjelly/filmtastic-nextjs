@@ -14,16 +14,17 @@ const SearchBarMain = () => {
   const [movieList, setMovieList] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
+  const [isClient, setIsClient] = useState(false)
 
   let storedMovieList;
   let storedSearchResult;
   let storedPageNumber;
 
-  if (typeof window !== "undefined") {
+  // if (typeof window !== "undefined") {
     storedMovieList = localStorage.getItem("movieList");
     storedSearchResult = localStorage.getItem("searchResult");
     storedPageNumber = localStorage.getItem("pageNumber");
-  }
+  // }
 
   const movieListRef = useRef(storedMovieList ? storedMovieList : null);
   const pageRef = useRef(storedPageNumber ? storedPageNumber : 1);
@@ -100,6 +101,7 @@ const SearchBarMain = () => {
   };
 
   useEffect(() => {
+    setIsClient(true)
     if (storedSearchResult) {
       pageRef.current = storedPageNumber ? JSON.parse(storedPageNumber) : null;
     }
@@ -165,11 +167,14 @@ const SearchBarMain = () => {
             </>
           )}
         </div>
-
-        {searchResult === null &&
+{
+  
+}
+        { isClient && (searchResult === null &&
         !isLoading &&
         typeof window &&
         storedMovieList === null ? (
+
           <Image
             className="transition-all opacity-0  absolute right-1/2 translate-x-1/2 mt-8 duration-[1s] delay-500"
             src={`/popcorn-bear.gif`}
@@ -184,7 +189,7 @@ const SearchBarMain = () => {
           (!movieList || movieList.Error) && (
             <div>
               <Image
-                className="transition-all absolute right-1/2 translate-x-1/2 mt-2 duration-300"
+                className="transition-all absolute right-1/2 translate-x-1/2 mt-2 duration-300 w-[300px] h-[300px]"
                 src={`/popcorn-crazy.gif`}
                 alt="Popcorn Bear"
                 width={300}
@@ -193,7 +198,8 @@ const SearchBarMain = () => {
               />
             </div>
           )
-        )}
+        ))}
+        
       </div>
       {movieList?.totalResults !== undefined &&
         movieList?.totalResults > 10 && (

@@ -30,7 +30,7 @@ const MovieList = ({ movieListRef }) => {
     <div className="flex flex-wrap justify-center">
       {movieListRef?.map(movie => {
         return (
-          <Link href={`/movie/${movie.imdbID}`} key={movie.imdbID}>
+          <Link href={`/movie/${movie.imdbID}`} prefetch={false} key={movie.imdbID}>
             <div className="m-4 w-[180px] h-[280px] relative rounded-md overflow-hidden group shadow-lg hover:shadow-2xl hover:scale-105 duration-75 group">
               <Image
                 src={
