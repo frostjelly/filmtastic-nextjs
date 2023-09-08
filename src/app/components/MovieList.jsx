@@ -22,10 +22,6 @@ const MovieList = ({ movieListRef }) => {
       ? Buffer.from(str).toString("base64")
       : window.btoa(str);
 
-  // useEffect(() => {
-  //   localStorage.getItem("movieList");
-  // }, []);
-
   return (
     <div className="flex flex-wrap justify-center">
       {movieListRef?.map(movie => {
