@@ -3,7 +3,7 @@ import SearchBarMain from "./components/SearchBarMain";
 export default function Home() {
   return (
     <main className="">
-      <div className="mb-20 flex flex-col justify-center items-center px-4">
+      <div className="mb-16 flex flex-col justify-center items-center px-4">
         <h1 className="mt-28 mb-2 text-6xl font-bold  flex  flex-col justify-center items-center">
         Filmtastic
         </h1>

@@ -138,7 +138,7 @@ const SearchBarMain = () => {
         </div>
         <div className="mt-8 mb-6 italic text-center">
           {isLoading ? (
-            <CgSpinner className="mt-20 animate-spin text-7xl m-auto" />
+            <CgSpinner className="mt-24 animate-spin text-7xl m-auto" />
           ) : (
             <>
               {movieList ? (
